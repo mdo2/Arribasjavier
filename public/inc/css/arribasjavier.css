@@ -1,0 +1,35 @@
+/*
+|--------------------------------------------------------------------------
+| Main CSS styles
+|--------------------------------------------------------------------------
+|
+| A lot of CSS styles aplying to the base template
+|
+*/
+
+/* Header */
+.page-header{
+	margin-top:0px;
+	margin-bottom:0px;
+	border-width:0px;
+	background: #f4726d;
+}
+.page-header .header-right{
+	float:right;
+}
+.page-header .header-main-text{
+	color:whitesmoke;
+	display:inline-block;
+	margin-left:-30px;
+	text-shadow: 0px 0px 10px #222;
+}
+.page-header small{
+	color: #fff;	
+}
+
+/* Navigation */
+.header-site-icon{
+	cursor:pointer;
+}
+
+/* Body and Main container */
