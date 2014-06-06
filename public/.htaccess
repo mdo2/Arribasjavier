@@ -4,7 +4,7 @@
     </IfModule>
 
     RewriteEngine On
-	RewriteBase /arribasjavier/
+	RewriteBase /
 	
     # Redirect Trailing Slashes...
 	#Comentado por que no me va bien, tengo que mirarmelo algun dia :)
