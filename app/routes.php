@@ -40,7 +40,7 @@ Route::group(array('prefix' => 'user'), function()
 			if (Auth::attempt(array('email' => $data["email"], 'password' => $data['password']),Input::get("login_remember")==="on"))
 				return Redirect::intended("/");
 			else
-				return Redirect::back()->withInput()->withErrors(array("bad_credentials" =>"El email o la contraseña son incorrectos."]));
+				return Redirect::back()->withInput()->withErrors(array("bad_credentials" =>"El email o la contraseña son incorrectos."));
 		}
 		else
 			return Redirect::back()->withInput()->withErrors($validator);
