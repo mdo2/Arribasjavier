@@ -1,3 +1,8 @@
+<?php /* Less */ ?>
+@if(App::environment('local'))
+<script src="{{ URL::to('libs/less/less.min.js') }}"></script>
+@endif
+
 <?php /* Modernizr */ ?>
 <script src="{{ URL::to('inc/js/modernizr.js') }}"></script>
 

@@ -11,15 +11,15 @@ $(function(){
 
 	/* Navigation */
 	//Navbar fixed
-	$('.navbar').affix({
+	$('body>nav.navbar').affix({
 		offset: {
 			top: function () {
-				return (this.top = $('header').outerHeight(true))
+				return (this.top = $('header').outerHeight(true));
 			}
 		}
-	});
+	}).on("affixed.bs.affix",function(){$("body").addClass("nav-fixed");}).on("affixed-top.bs.affix",function(){$("body").removeClass("nav-fixed");});
 	
 	//Icon link
-	$("header .header-site-icon").click(function(){location.href=$(".navbar-brand").attr("href");});
+	$("header h1").click(function(){location.href=$(".navbar-brand").attr("href");});
 	
 });

@@ -20,16 +20,65 @@ Route::get('/', function()
 
 /* User routes */
 
-Route::get('user/{page}', function($page="login")
+Route::group(array('prefix' => 'user'), function()
 {
-	if(Auth::check()){
-		if($page=="login")
-			return Redirect::to("home");
-	}
-	elseif($page!=="login")
-		return Redirect::to("user/login");
-    return View::make("user.".$page);
+	/* Login */
+	Route::get("login",array("before"=>"guest",function (){
+		return View::make("user.login");
+	}));
+	
+	Route::post("login",array("before"=>"guest",function(){
+		$data=array(
+			"email" => Input::get("login_email"),
+			"password" => Input::get("login_password")
+		);
+		$validator=Validator::make($data, array(
+			"email" => "required|email",
+			"password" => "required|min:6"
+		));
+		if($validator->passes()){
+			if (Auth::attempt(array('email' => $data["email"], 'password' => $data['password']),(!empty(Input::get("login_remember")) and Input::get("login_remember")==="on")))
+				return Redirect::intended("/");
+			else
+				return Redirect::back()->withInput()->withErrors(array("bad_credentials" => ["El email o la contraseña son incorrectos."]));
+		}
+		else
+			return Redirect::back()->withInput()->withErrors($validator);
+	}));
+	
+	/* Register */
+	Route::post("register",array("before"=>"guest","uses" => "UserController@store"));
+	Route::get("register",array("before"=>"guest",function(){
+		return View::make("user.login");
+	}));
+	
+	/* Remind */
+	Route::get("remind",array("before"=>"guest","uses"=>"RemindersController@getRemind"));
+	Route::post("remind",array("before"=>"guest","uses"=>"RemindersController@postRemind"));
+	
+	Route::get("reset/{token}",array("before"=>"guest","uses"=>"RemindersController@getReset"));
+	Route::post("reset",array("before"=>"guest","uses"=>"RemindersController@postReset"));
+	
+	/* Resto */
+	Route::group(array('before' => 'auth'), function()
+	{
+		Route::get('/', function()
+		{
+			return View::make("user.profile");
+		});
+		
+		Route::get("logout",function(){
+			Auth::logout();
+			return Redirect::to("/");
+		});
+		
+		Route::get('{page}', function($page="login")
+		{
+			return View::make("user.".$page);
+		});
+	});
 });
+
 
 /*
 |--------------------------------------------------------------------------

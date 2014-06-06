@@ -9,7 +9,7 @@ class RemindersController extends Controller {
 	 */
 	public function getRemind()
 	{
-		return View::make('password.remind');
+		return View::make('user.remind');
 	}
 
 	/**
@@ -19,16 +19,25 @@ class RemindersController extends Controller {
 	 */
 	public function postRemind()
 	{
-		switch ($response = Password::remind(Input::only('email'),function($message){
-			$message->subject("Password Reminder");
-		}))
+		$validator=Validator::make(Input::only("email"), array(
+			"email" => "required|email|exists:users"
+		));
+		if($validator->passes())
 		{
-			case Password::INVALID_USER:
-				return Redirect::back()->with('error', Lang::get($response));
+			switch ($response = Password::remind(Input::only('email'),function($message){
+				$message->subject("Reseteo de contraseña de @rribasjavier");
+			}))
+			{
+				case Password::INVALID_USER:
+					return Redirect::back()->withErrors(array($response,[ Lang::get($response)]));
 
-			case Password::REMINDER_SENT:
-				return Redirect::back()->with('status', Lang::get($response));
+				case Password::REMINDER_SENT:
+					Session::set('recoveryEmail',Input::get('email'));
+					return Redirect::back()->with('status', Lang::get($response));
+			}
 		}
+		else
+			return Redirect::back()->withInput()->withErrors($validator);
 	}
 
 	/**
@@ -39,9 +48,9 @@ class RemindersController extends Controller {
 	 */
 	public function getReset($token = null)
 	{
-		if (is_null($token)) App::abort(404);
-
-		return View::make('password.reset')->with('token', $token);
+		if(is_null($token))
+			App::abort(404);
+		return View::make('user.reset')->with('token', $token);
 	}
 
 	/**
@@ -52,9 +61,9 @@ class RemindersController extends Controller {
 	public function postReset()
 	{
 		$credentials = Input::only(
-			'email', 'password', 'password_confirmation', 'token'
+			'password', 'password_confirmation', 'token'
 		);
-
+		$credentials["email"]=Session::get('recoveryEmail');
 		$response = Password::reset($credentials, function($user, $password)
 		{
 			$user->password = Hash::make($password);
@@ -67,11 +76,12 @@ class RemindersController extends Controller {
 			case Password::INVALID_PASSWORD:
 			case Password::INVALID_TOKEN:
 			case Password::INVALID_USER:
-				return Redirect::back()->with('error', Lang::get($response));
+				return Redirect::back()->withErrors(array('error' => Lang::get($response)));
 
 			case Password::PASSWORD_RESET:
+				$user = User::where('email','=',$credentials["email"])->firstOrFail();
+				Auth::login($user);
 				return Redirect::to('/');
 		}
 	}
-
 }

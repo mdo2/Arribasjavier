@@ -40,7 +40,8 @@ return array(
 	| stay compatible with the Mailgun e-mail applications by default.
 	|
 	*/
-
+	
+	// 'port' => 465,
 	'port' => 587,
 
 	/*
@@ -54,7 +55,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => null, 'name' => null),
+	'from' => array('address' => "postmaster@sandboxb2e24bcc9e7c4817a582e374589101d9.mailgun.org", 'name' => "Administrador de @rribasjavier"),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +81,7 @@ return array(
 	|
 	*/
 
-	'username' => null,
+	'username' => "postmaster@sandboxb2e24bcc9e7c4817a582e374589101d9.mailgun.org",
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +94,7 @@ return array(
 	|
 	*/
 
-	'password' => null,
+	'password' => "7c0rrzv3j2l7",
 
 	/*
 	|--------------------------------------------------------------------------

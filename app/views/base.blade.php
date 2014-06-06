@@ -13,12 +13,14 @@
 		@section("navigation")
 			@include("navigation.navigation")
 		@show
-		
-		<div class="container">
-			@yield('content')
+		<div class="main-content">
+			<div class="container">
+				@yield('content')
+			</div>
 		</div>
 	
 		@section("footer")
+			@include('inc.footer_base')
 		@show
 		
 		@section("foot")

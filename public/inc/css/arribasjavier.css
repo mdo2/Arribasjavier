@@ -6,30 +6,65 @@
 | A lot of CSS styles aplying to the base template
 |
 */
-
 /* Header */
-.page-header{
-	margin-top:0px;
-	margin-bottom:0px;
-	border-width:0px;
-	background: #f4726d;
+.page-header {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  border-width: 0px;
+  background: #f4726d;
 }
-.page-header .header-right{
-	float:right;
+.page-header .header-right {
+  float: right;
 }
-.page-header .header-main-text{
-	color:whitesmoke;
-	display:inline-block;
-	margin-left:-30px;
-	text-shadow: 0px 0px 10px #222;
+.page-header .header-main-text {
+  color: whitesmoke;
+  display: inline-block;
+  margin-left: -30px;
+  text-shadow: 0px 0px 10px #222;
 }
-.page-header small{
-	color: #fff;	
+.page-header small {
+  color: #fff;
 }
-
+.page-header h1 {
+  cursor: pointer;
+}
 /* Navigation */
-.header-site-icon{
-	cursor:pointer;
+body > nav.navbar {
+  margin-bottom: 0px;
+  background-color: white;
 }
-
+body > nav.navbar.affix {
+  width: 100%;
+  top: 0px;
+}
 /* Body and Main container */
+body {
+  background-color: #333333;
+}
+body > .main-content > .container {
+  background-color: #fefefe;
+  border: 1px solid #ccc;
+  border-top-width: 0px;
+  height: 100%;
+  padding: 15px;
+  min-height: 500px;
+}
+body.nav-fixed {
+  padding-top: 50px;
+}
+body > .main-content {
+  background: url('../../imgs/background_site.jpg') no-repeat fixed;
+}
+/* Footer */
+footer.page-footer {
+  padding: 20px 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  border-width: 0px;
+  background-color: rgba(0, 0, 0, 0);
+  border-top: 4px solid rgba(0, 0, 0, 0.1);
+  color: #aaaaaa;
+}
+footer.page-footer a {
+  color: #f4645f;
+}

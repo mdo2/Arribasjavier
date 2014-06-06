@@ -7,7 +7,8 @@
 	RewriteBase /arribasjavier/
 	
     # Redirect Trailing Slashes...
-    RewriteRule ^(.*)/$ /$1 [L,R=301]
+	#Comentado por que no me va bien, tengo que mirarmelo algun dia :)
+    #RewriteRule ^(.*)/$ /$1 [L,R=301]
 
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
