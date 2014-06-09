@@ -17,7 +17,7 @@
 	<div class="col-xs-12">
 		<form class="form-horizontal" role="form" method="POST" action="{{ action('RemindersController@postReset') }}">
 			<input type="hidden" name="token" value="{{ $token }}" />
-			@if (!empty(Session::get('recoveryEmail')))
+			@if (Session::get('recoveryEmail'))
 			<div class="row">
 				<div class="col-xs-12 col-xs-6">
 					<div class="form-group">

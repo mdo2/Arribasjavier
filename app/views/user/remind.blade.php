@@ -6,7 +6,7 @@
 			{{ trans('messages.password-recovery-system') }}
 		</div>
 	</div>
-	@if(!empty(Session::get('status')))
+	@if(Session::get('status'))
 	<div class="alert alert-success">
 		{{ Session::get('status') }}
 	</div>	
