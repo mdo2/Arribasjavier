@@ -29,7 +29,7 @@ class RemindersController extends Controller {
 			}))
 			{
 				case Password::INVALID_USER:
-					return Redirect::back()->withErrors(array($response,[ Lang::get($response)]));
+					return Redirect::back()->withErrors(array($response,Lang::get($response)));
 
 				case Password::REMINDER_SENT:
 					Session::set('recoveryEmail',Input::get('email'));
