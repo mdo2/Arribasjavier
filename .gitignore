@@ -2,4 +2,8 @@
 .DS_Store
 Thumbs.db
 
+<<<<<<< HEAD
 *.htaccess
+=======
+*.htaccess
+>>>>>>> 7d546ac03239f14b8b9e27083a3d001e5556d92f
